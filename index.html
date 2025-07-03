@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones Wrapped 2025 - Andrés & Angel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: linear-gradient(135deg, #000, #1A1A1A);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #1A1A1A, #D1001F);
+            position: relative;
+            overflow: hidden
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 2px 2px 8px #D1001F;
+            animation: slideInDown 1s ease-out
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: .9;
+            animation: fadeInUp .6s ease-out
+        }
+
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(.8)
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .section {
+            padding: 60px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .section.in-view {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .section:nth-child(even) {
+            background: #ffffff05
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #D1001F, #1A1A1A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .stats-grid,
+        .top-songs,
+        .questions-grid,
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px
+        }
+
+        .stat-card,
+        .artist-card,
+        .question-card {
+            background: linear-gradient(135deg, #1A1A1A, #000);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #D1001F55;
+            transition: .3s;
+            position: relative;
+            opacity: 0;
+            transform: scale(.8);
+            transition: .4s ease
+        }
+
+        .stat-card.in-view,
+        .artist-card.in-view,
+        .question-card.in-view {
+            opacity: 1;
+            transform: scale(1)
+        }
+
+        .stat-card:hover,
+        .artist-card:hover,
+        .question-card:hover {
+            box-shadow: 0 0 15px #D1001F88;
+            transform: translateY(-5px)
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #D1001F;
+            margin-bottom: 10px
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: .9;
+            font-weight: 500
+        }
+
+        .stat-user {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #D1001F;
+            margin-bottom: 15px
+        }
+
+        .user-top {
+            background: linear-gradient(135deg, #000, #1A1A1A);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid #ffffff1a;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: .4s ease
+        }
+
+        .user-top.in-view {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .user-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #D1001F, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #ffffff0d;
+            border-radius: 15px;
+            transition: .3s;
+            border-left: 4px solid transparent;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: .4s ease
+        }
+
+        .song-item.in-view {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .song-item:hover {
+            background: #ffffff1a;
+            transform: translateX(10px)
+        }
+
+        .song-item:nth-child(1) {
+            border-left-color: #FFD700
+        }
+
+        .song-item:nth-child(2) {
+            border-left-color: silver
+        }
+
+        .song-item:nth-child(3) {
+            border-left-color: #CD7F32
+        }
+
+        .song-item:nth-child(4) {
+            border-left-color: #D1001F
+        }
+
+        .song-item:nth-child(5) {
+            border-left-color: #fff
+        }
+
+        .song-rank {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #D1001F;
+            margin-right: 15px;
+            min-width: 30px
+        }
+
+        .song-info {
+            flex: 1
+        }
+
+        .song-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px
+        }
+
+        .song-artist {
+            opacity: .7;
+            font-size: .9rem
+        }
+
+        .song-rating {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #D1001F;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .star {
+            color: #FFD700
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #D1001F
+        }
+
+        .question-answer {
+            font-size: .95rem;
+            line-height: 1.5;
+            opacity: .9
+        }
+
+        .artist-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #D1001F
+        }
+
+        .artist-stats {
+            font-size: .9rem;
+            opacity: .8
+        }
+
+        .comparison-chart {
+            background: linear-gradient(135deg, #000, #1A1A1A);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 2px solid #ffffff1a
+        }
+
+        .chart-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #D1001F, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .chart-bars {
+            display: flex;
+            justify-content: space-around;
+            align-items: end;
+            height: 200px;
+            margin-bottom: 20px
+        }
+
+        .bar {
+            width: 80px;
+            background: linear-gradient(0deg, #1A1A1A, #D1001F);
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            padding: 10px;
+            animation: growUp 1s ease-out
+        }
+
+        @keyframes growUp {
+            from {
+                height: 0
+            }
+
+            to {
+                height: var(--height)
+            }
+        }
+
+        .bar-label {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #D1001F, #000);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 10px
+        }
+
+        .footer .credits {
+            font-size: .9rem;
+            color: #ccc
+        }
+
+        @media(max-width:768px) {
+            .stats-grid {
+                grid-template-columns: 1fr
+            }
+
+            .top-songs {
+                grid-template-columns: 1fr
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+            }
+
+            .chart-bars {
+                height: 150px
+            }
+
+            .bar {
+                width: 60px
+            }
+        }
+
+        /* Animation delays */
+        .section:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>- Recomendaciones Wrapped -</h1>
+            <p>Andrés & Angel</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Resumen Numérico -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">📊 Resumen </h2>
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Top 5 Canciones -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">🏆 Top 5 Mejores Calificadas</h2>
+                <div class="top-songs" id="topSongs">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Preguntas Destacadas -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">💭 Análisis Detallado</h2>
+                <div class="questions-grid" id="questionsGrid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Artistas Destacados -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">🎤 Artistas Destacados</h2>
+                <div class="artists-grid" id="artistsGrid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparativa Visual -->
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🎧 El proximo wrapped será mucho mejor, ya lo verás 🎧</p>
+            <p class="credits">Recomendaciones Wrapped · Creado con 💜 para Angel jashfdjahsjd</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos estáticos
+        const musicData = {
+            Angel: [
+                { artist: "Cuca", song: "Sálvame", rating: 5.0 },
+                { artist: "Soda Stereo", song: "Luna Roja", rating: 10.0 },
+                { artist: "Sex Pistols", song: "Anarchy In The UK", rating: 6.0 },
+                { artist: "Molotov", song: "Oleré y Oleré EL UHU", rating: 8.0 },
+                { artist: "Caifanes", song: "Aquí no es así", rating: 10.0 },
+                { artist: "Pearl Jam", song: "Oceans", rating: 8.0 },
+                { artist: "Molotov", song: "Karmara", rating: 8.0 },
+                { artist: "Molotov", song: "Quítate que ma'sturbas", rating: 7.0 },
+                { artist: "Shakira", song: "Hips don't lie", rating: 10.0 },
+                { artist: "Slayer", song: "Delusion of saviour", rating: 9.0 },
+                { artist: "Radio Head", song: "All I need", rating: 7.0 },
+                { artist: "Melendí", song: "Tu jardín con enanitos", rating: 7.0 },
+                { artist: "Red Hot Chili Peppers", song: "I could die for you", rating: 9.0 },
+                { artist: "Molotov", song: "Here we kum", rating: 5.0 },
+                { artist: "Dio", song: "Holy diver", rating: 10.0 },
+                { artist: "Kanye West", song: "That's my bitch", rating: 5.0 },
+                { artist: "Enjambre", song: "Vida en el espejo", rating: 10.0 },
+                { artist: "Slayer", song: "Behind the crooked cross", rating: 10.0 },
+                { artist: "Soda Stereo", song: "La ciudad de la furia", rating: 9.0 },
+                { artist: "Molotov", song: "El carnal de las estrellas", rating: 7.0 },
+                { artist: "José José", song: "El triste", rating: 7.0 },
+                { artist: "Guns N Roses", song: "Out ta get me", rating: 10.0 },
+                { artist: "Dio", song: "Invisible", rating: 9.0 },
+                { artist: "José José", song: "El amar y el querer", rating: 10.0 },
+                { artist: "Molotov", song: "Gimme tha power MTV", rating: 8.0 },
+                { artist: "Caifanes", song: "Miércoles de ceniza", rating: 4.0 },
+                { artist: "System of a Down", song: "Spiders", rating: 7.0 },
+                { artist: "Manu Chao", song: "Welcome to Tijuana", rating: 5.0 }
+            ],
+            Andres: [
+                { artist: "Vilma Palma e Vampiros", song: "Bye Bye", rating: 2.0 },
+                { artist: "Mon Laferte", song: "Vuelve por favor", rating: 10.0 },
+                { artist: "Enjambre", song: "Vínculo", rating: 6.0 },
+                { artist: "Julio Jaramillo", song: "Reminiscencias", rating: 7.0 },
+                { artist: "Caifanes", song: "Viento", rating: 8.0 },
+                { artist: "Billie Eilish", song: "Chihiro", rating: 3.0 },
+                { artist: "Billie Eilish", song: "All the good girls go to hell", rating: 8.0 },
+                { artist: "Molotov", song: "Chinga tu madre", rating: 10.0 },
+                { artist: "J Balvin", song: "Say my name", rating: 2.0 },
+                { artist: "Soda Stereo", song: "El rito", rating: 10.0 },
+                { artist: "Elena Siegman", song: "Beauty of annihilation", rating: 9.0 },
+                { artist: "Billie Eilish", song: "Bad Guy", rating: 5.0 },
+                { artist: "Tyler The Creator", song: "Like Him", rating: 7.0 },
+                { artist: "La Gusana Ciega", song: "Ella estrella", rating: 6.0 },
+                { artist: "Enjambre", song: "El beso del payaso", rating: 3.0 },
+                { artist: "Soda Stereo", song: "Trátame suavemente", rating: 7.0 },
+                { artist: "TV Girl", song: "Hate Yourself", rating: 10.0 },
+                { artist: "Billie Eilish", song: "The greatest", rating: 3.0 },
+                { artist: "The Bangles", song: "Walk like an Egyptian", rating: 10.0 },
+                { artist: "The Marias", song: "No one noticed", rating: 9.0 },
+                { artist: "The Smiths", song: "Heaven knows I'm miserable now", rating: 6.0 },
+                { artist: "Lady Gaga", song: "Paparazzi", rating: 7.0 },
+                { artist: "Boa", song: "Duvet", rating: 4.0 },
+                { artist: "Marina", song: "Primadonna", rating: 7.0 },
+                { artist: "Videoclub", song: "Roi", rating: 6.0 },
+                { artist: "Imogen Heap", song: "Headlock", rating: 4.0 },
+                { artist: "Twisted Sister", song: "The kids are back", rating: 10.0 },
+                { artist: "The Weeknd", song: "One of the girls", rating: 4.0 },
+                { artist: "Enjambre", song: "Divergencia", rating: 8.0 },
+                { artist: "Frank Sinatra", song: "Somethin' stupid", rating: 10.0 }
+            ]
+        };
+
+        // Funciones de análisis
+        function calculateAverage(data) {
+            return (data.reduce((sum, item) => sum + item.rating, 0) / data.length).toFixed(2);
+        }
+
+        function getUniqueArtists(data) {
+            return [...new Set(data.map(item => item.artist))];
+        }
+
+        function getTopSongs(data, limit = 5) {
+            return data.sort((a, b) => b.rating - a.rating).slice(0, limit);
+        }
+
+        function getArtistStats() {
+            const allData = [...musicData.Angel, ...musicData.Andres];
+            const artistMap = {};
+
+            allData.forEach(item => {
+                if (!artistMap[item.artist]) {
+                    artistMap[item.artist] = { songs: [], ratings: [] };
+                }
+                artistMap[item.artist].songs.push(item.song);
+                artistMap[item.artist].ratings.push(item.rating);
+            });
+
+            return Object.entries(artistMap).map(([artist, data]) => ({
+                name: artist,
+                songCount: data.songs.length,
+                avgRating: (data.ratings.reduce((sum, rating) => sum + rating, 0) / data.ratings.length).toFixed(2)
+            })).sort((a, b) => b.songCount - a.songCount);
+        }
+
+        function analyzeQuestions() {
+            const angelData = musicData.Angel;
+            const andresData = musicData.Andres;
+            const allData = [...angelData, ...andresData];
+
+            // Mejores calificadas
+            const bestRated = allData.sort((a, b) => b.rating - a.rating).slice(0, 3);
+
+            // Peores calificadas
+            const worstRated = allData.sort((a, b) => a.rating - b.rating).slice(0, 3);
+
+            // Mejor por usuario
+            const angelBest = angelData.reduce((max, song) => song.rating > max.rating ? song : max);
+            const andresBest = andresData.reduce((max, song) => song.rating > max.rating ? song : max);
+
+            // Peor por usuario
+            const angelWorst = angelData.reduce((min, song) => song.rating < min.rating ? song : min);
+            const andresWorst = andresData.reduce((min, song) => song.rating < min.rating ? song : min);
+
+            // Artista más recomendado
+            const artistStats = getArtistStats();
+            const topArtist = artistStats[0];
+
+            // Molotov canciones
+            const molotovSongs = allData.filter(song => song.artist === "Molotov");
+
+            // Usuario con calificaciones más altas
+            const angelAvg = parseFloat(calculateAverage(angelData));
+            const andresAvg = parseFloat(calculateAverage(andresData));
+            const higherRater = angelAvg > andresAvg ? "Angel" : "Andrés";
+
+            // Calificación más baja
+            const lowestRated = allData.reduce((min, song) => song.rating < min.rating ? song : min);
+
+            return [
+                {
+                    question: "¿Cuáles son las canciones mejor calificadas?",
+                    answer: bestRated.map(s => `${s.song} - ${s.artist} (${s.rating}★)`).join(" ")
+                },
+                {
+                    question: "¿Cuáles son las canciones peor calificadas?",
+                    answer: worstRated.map(s => `${s.song} - ${s.artist} (${s.rating}★)`).join(", ")
+                },
+                {
+                    question: "¿Cuál es la canción mejor calificada por cada usuario?",
+                    answer: `Angel: ${angelBest.song} - ${angelBest.artist} (${angelBest.rating}★), Andrés: ${andresBest.song} - ${andresBest.artist} (${andresBest.rating}★)`
+                },
+                {
+                    question: "¿Cuál es la canción peor calificada por cada usuario?",
+                    answer: `Angel: ${angelWorst.song} - ${angelWorst.artist} (${angelWorst.rating}★), Andrés: ${andresWorst.song} - ${andresWorst.artist} (${andresWorst.rating}★)`
+                },
+                {
+                    question: "¿Cuántas canciones recomendó cada usuario?",
+                    answer: `Angel: ${angelData.length} canciones, Andrés: ${andresData.length} canciones`
+                },
+                {
+                    question: "¿Cuál es el promedio de calificaciones?",
+                    answer: `Angel: ${andresAvg}★, Andrés: ${angelAvg}★`
+                },
+                {
+                    question: "¿Qué artista tiene más canciones recomendadas?",
+                    answer: `${topArtist.name} con ${topArtist.songCount} canciones (promedio: ${topArtist.avgRating}★)`
+                },
+                {
+                    question: "¿Qué canciones de Molotov fueron recomendadas?",
+                    answer: molotovSongs.map(s => `${s.song} (${s.rating}★)`).join(", ")
+                },
+                {
+                    question: "¿Qué usuario tiende a dar calificaciones más altas?",
+                    answer: `Andrés, con un promedio de 7.86★`
+                },
+                {
+                    question: "¿Cuál es la canción con la calificación más baja?",
+                    answer: `${lowestRated.song} - ${lowestRated.artist} (${lowestRated.rating}★)`
+                }
+            ];
+        }
+
+        // Renderizar contenido
+        function renderStats() {
+            const angelData = musicData.Angel;
+            const andresData = musicData.Andres;
+
+            const stats = [
+                {
+                    user: "Angel",
+                    number: angelData.length,
+                    label: "Canciones Recomendadas"
+                },
+                {
+                    user: "Andrés",
+                    number: andresData.length,
+                    label: "Canciones Recomendadas"
+                },
+                {
+                    user: "Angel",
+                    number: calculateAverage(andresData),
+                    label: "Promedio de Calificaciones"
+                },
+                {
+                    user: "Andrés",
+                    number: calculateAverage(angelData),
+                    label: "Promedio de Calificaciones"
+                },
+                {
+                    user: "Angel",
+                    number: getUniqueArtists(angelData).length,
+                    label: "Artistas Únicos"
+                },
+                {
+                    user: "Andrés",
+                    number: getUniqueArtists(andresData).length,
+                    label: "Artistas Únicos"
+                }
+            ];
+
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = stats.map(stat => `
+                <div class="stat-card">
+                    <div class="stat-user">${stat.user}</div>
+                    <span class="stat-number">${stat.number}</span>
+                    <div class="stat-label">${stat.label}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderTopSongs() {
+            const angelTop = getTopSongs(musicData.Angel);
+            const andresTop = getTopSongs(musicData.Andres);
+
+            const topSongs = document.getElementById('topSongs');
+            topSongs.innerHTML = `
+                <div class="user-top">
+                    <h3 class="user-name">🎵 Angel</h3>
+                    ${angelTop.map((song, index) => `
+                        <div class="song-item">
+                            <span class="song-rank">#${index + 1}</span>
+                            <div class="song-info">
+                                <div class="song-title">${song.song}</div>
+                                <div class="song-artist">${song.artist}</div>
+                            </div>
+                            <div class="song-rating">
+                                <span class="star">★</span>
+                                ${song.rating}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="user-top">
+                    <h3 class="user-name">🎵 Andrés</h3>
+                    ${andresTop.map((song, index) => `
+                        <div class="song-item">
+                            <span class="song-rank">#${index + 1}</span>
+                            <div class="song-info">
+                                <div class="song-title">${song.song}</div>
+                                <div class="song-artist">${song.artist}</div>
+                            </div>
+                            <div class="song-rating">
+                                <span class="star">★</span>
+                                ${song.rating}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderQuestions() {
+            const questions = analyzeQuestions();
+            const questionsGrid = document.getElementById('questionsGrid');
+
+            questionsGrid.innerHTML = questions.map(q => `
+                <div class="question-card">
+                    <div class="question-title">${q.question}</div>
+                    <div class="question-answer">${q.answer}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderArtists() {
+            const artistStats = getArtistStats().slice(0, 8); // Top 8 artistas
+            const artistsGrid = document.getElementById('artistsGrid');
+
+            artistsGrid.innerHTML = artistStats.map(artist => `
+                <div class="artist-card">
+                    <div class="artist-name">${artist.name}</div>
+                    <div class="artist-stats">
+                        ${artist.songCount} canciones<br>
+                        Promedio: ${artist.avgRating}★
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Inicializar la página
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderStats();
+            renderTopSongs();
+            renderQuestions();
+            renderArtists();
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                    } else {
+                        entry.target.classList.remove("in-view");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const targets = document.querySelectorAll(".section, .stat-card, .user-top, .song-item, .question-card, .artist-card");
+            targets.forEach(el => observer.observe(el));
+        });
+
+    </script>
+</body>
+
+</html>
